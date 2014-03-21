@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+from wsc.iam import Session
 
 
 class UserAndSession:
@@ -35,3 +36,6 @@ class UserAndSession:
 
     def get_id(self):
         return '{}:{}'.format(self.user_id, self.session_id)
+
+    def get_wsc_session(self):
+        return Session(self.user_id, self.session_id)

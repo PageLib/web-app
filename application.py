@@ -52,6 +52,10 @@ def login_action():
 
 @app.route('/logout')
 def logout_action():
+    # Close the WS session
+    iam = IAM(wsc_config)
+    iam.logout(current_user.get_wsc_session())
+
     logout_user()
     return redirect('/')
 
