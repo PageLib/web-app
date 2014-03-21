@@ -5,7 +5,31 @@
         <div class="col-xs-12">
             <h2>Mon profil</h2>
 
-            <p>...</p>
+            <h3>Solde</h3>
+            <p>Votre solde actuel : <strong>{{ balance }} EUR</strong></p>
+
+            <h3>Envoyer un document</h3>
+            <form class="form-horizontal" method="post" action="/upload" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Nom :</label>
+                    <div class="col-xs-5">
+                        <input type="text" name="filename" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Fichier :</label>
+                    <div class="col-xs-5">
+                        <input type="file" name="file" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-5 col-xs-offset-2">
+                        <input type="submit" value="Envoyer" class="btn btn-success">
+                    </div>
+                </div>
+            </form>
 
             <p style="text-align: right;"><a href="/logout">Déconnexion</a></p>
         </div>
