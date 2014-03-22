@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 
 from wsc.Configuration import Configuration
 from wsc.iam import IAM
-from wsc.exc import InvalidCredentials
+from wsc.exc import InvalidCredentials, ApiError, NotFound
 from wsc.repo import BalanceRepository, DocumentRepository
 
 app = Flask(__name__)
@@ -48,7 +48,7 @@ def login_action():
 
         return redirect('/home')
 
-    except InvalidCredentials:
+    except NotFound:
         flash('Nom d\'utilisateur ou mot de passe invalide.', 'danger')
         return render_template('index.html')
 
