@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from wsc.iam import Session
+from wsc.iam import Session, IAM
 
 
 class UserAndSession:
@@ -25,8 +25,7 @@ class UserAndSession:
             return None
 
     def is_authenticated(self):
-        # (appel aux webservices pour vérifier que la session est active)
-        return True
+        return IAM(wsc_config).is_session_active(self.get_wsc_session())
 
     def is_active(self):
         return True
@@ -39,3 +38,6 @@ class UserAndSession:
 
     def get_wsc_session(self):
         return Session(self.user_id, self.session_id)
+
+
+from application import wsc_config

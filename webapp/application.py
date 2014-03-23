@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import hashlib
 import os
 from flask import Flask, render_template, redirect, request, flash
@@ -12,8 +14,6 @@ from wsc.repo import BalanceRepository, DocumentRepository
 app = Flask(__name__)
 app.config.from_object('config')
 
-from security import UserAndSession
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -21,6 +21,8 @@ wsc_config = Configuration()
 wsc_config.iam_endpoint = app.config['WS_IAM_ENDPOINT']
 wsc_config.invoicing_endpoint = app.config['WS_INVOICING_ENDPOINT']
 wsc_config.docs_endpoint = app.config['WS_DOCS_ENDPOINT']
+
+from security import UserAndSession
 
 
 @login_manager.user_loader
@@ -86,6 +88,18 @@ def upload_action():
     repo.upload(request.form['filename'], tmp_path)
 
     return redirect('/home')
+
+
+@app.errorhandler(401)
+def error_handler_401(e):
+    flash(u'Accès refusé. Votre session a peut-être expiré.', 'warning')
+    return redirect('/')
+
+
+@app.errorhandler(403)
+def error_handler_403(e):
+    flash(u'Accès refusé. Votre session a peut-être expiré.', 'warning')
+    return redirect('/')
 
 
 if __name__ == '__main__':
