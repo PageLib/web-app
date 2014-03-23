@@ -6,7 +6,7 @@
             <h2>Mon profil</h2>
 
             <h3>Solde</h3>
-            <p>Votre solde actuel : <strong>{{ balance }} EUR</strong></p>
+            <p>Votre solde actuel : <strong>{{ '%.2f' % balance }} EUR</strong></p>
 
             <h3>Envoyer un document</h3>
             <form class="form-horizontal" method="post" action="/upload" enctype="multipart/form-data">
