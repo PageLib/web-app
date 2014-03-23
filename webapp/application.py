@@ -87,6 +87,8 @@ def upload_action():
     repo = DocumentRepository(wsc_config, current_user.get_wsc_session())
     repo.upload(request.form['filename'], tmp_path)
 
+    flash(u'Document chargé.', 'success')
+
     return redirect('/home')
 
 
